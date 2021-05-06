@@ -87,7 +87,7 @@ async fn fonts_pbf(params: web::Path<(String, String)>) -> Result<HttpResponse> 
 
 fn req_baseurl(req: &HttpRequest) -> String {
     let conninfo = req.connection_info();
-    format!("{}://{}", conninfo.scheme(), conninfo.host())
+    format!("{}s://{}", conninfo.scheme(), conninfo.host())
 }
 
 async fn tileset_tilejson(
