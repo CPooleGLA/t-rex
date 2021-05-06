@@ -7,7 +7,6 @@ use crate::core::config::ApplicationCfg;
 use crate::mvt_service::MvtService;
 use crate::runtime_config::{config_from_args, service_from_args};
 use crate::static_files::StaticFiles;
-use actix_cors::Cors;
 use actix_files as fs;
 use actix_web::dev::BodyEncoding;
 use actix_web::http::{header, ContentEncoding};
@@ -247,7 +246,6 @@ pub async fn webserver(args: ArgMatches<'static>) -> std::io::Result<()> {
             .data(service.clone())
             .wrap(middleware::Logger::new("%r %s %b %Dms %a"))
             .wrap(Compress::default())
-            .wrap(Cors::default().send_wildcard().allowed_methods(vec!["GET"]))
             .service(
                 web::resource("/index.json").route(
                     web::route()
